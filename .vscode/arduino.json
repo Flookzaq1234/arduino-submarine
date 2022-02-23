@@ -1,0 +1,6 @@
+{
+    "sketch": "submarine.cpp",
+    "output": "build",
+    "board": "arduino:avr:uno",
+    "port": "COM4"
+}
