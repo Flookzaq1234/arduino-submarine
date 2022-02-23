@@ -6,5 +6,6 @@
     "editor.multiCursorModifier": "alt",
     "files.eol": "\n",
     "files.autoSave": "onFocusChange",
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: LLVM, IndentWidth: 4, ColumnLimit: 0 }"
 }
