@@ -28,8 +28,8 @@ int right_joystick_mapped_y_position = 0;
 // * motor ports
 #define left_motor_port1 1
 #define left_motor_port2 2
-// #define right_motor_port1 0
-// #define right_motor_port2 0
+#define right_motor_port1 0
+#define right_motor_port2 0
 
 // * Controller plans
 // Left up => Left x positive
@@ -76,54 +76,31 @@ void loop() {
     right_joystick_mapped_x_position = map(right_joystick_x_position, 0, 1023, 512, -512);
     right_joystick_mapped_y_position = map(right_joystick_y_position, 0, 1023, 512, -512);
 
-    digitalWrite(left_motor_port1, LOW);
-    digitalWrite(left_motor_port2, LOW);
-    delay(2000);
-
-    digitalWrite(left_motor_port1, HIGH);
-    digitalWrite(left_motor_port2, LOW);
-
-    delay(2000);
-    digitalWrite(left_motor_port1, LOW);
-    digitalWrite(left_motor_port2, LOW);
-    delay(2000);
-
-    digitalWrite(left_motor_port1, LOW);
-    digitalWrite(left_motor_port2, HIGH);
-    delay(2000);
-
-    digitalWrite(left_motor_port1, LOW);
-    digitalWrite(left_motor_port2, LOW);
-    delay(2000);
-
-    // if (negative_joystick_threshold < left_joystick_mapped_x_position && left_joystick_mapped_x_position < joystick_threshold) {
-    //     digitalWrite(left_motor_port1, LOW);
-    //     digitalWrite(left_motor_port2, LOW);
-    // } else {
-    //     // Joystick going forward
-    //     if (left_joystick_mapped_x_position > joystick_threshold) {
-    //         digitalWrite(left_motor_port1, HIGH);
-    //         digitalWrite(left_motor_port2, LOW);
-    //     } else if (left_joystick_mapped_x_position < negative_joystick_threshold) {
-    //         digitalWrite(left_motor_port1, LOW);
-    //         digitalWrite(left_motor_port2, HIGH);
-    //     }
-    // }
-
-    // if (left_joystick_mapped_y_position > negative_joystick_threshold) {
-    //     digitalWrite(left_motor_port1, LOW);
-    //     digitalWrite(left_motor_port2, HIGH);
-    //     digitalWrite(right_motor_port1, HIGH);
-    //     digitalWrite(right_motor_port2, LOW);
-    // }
-    // if (left_joystick_mapped_y_position > joystick_threshold) {
-    //     digitalWrite(left_motor_port1, HIGH);
-    //     digitalWrite(left_motor_port2, LOW);
-    //     digitalWrite(right_motor_port1, LOW);
-    //     digitalWrite(right_motor_port2, HIGH);
-    // }
+    // * Capture any joystick movements if any
+    if (
+        left_joystick_mapped_x_position < negative_joystick_threshold || left_joystick_mapped_x_position > joystick_threshold ||
+        left_joystick_mapped_y_position < negative_joystick_threshold || left_joystick_mapped_y_position > joystick_threshold ||
+        right_joystick_mapped_x_position < negative_joystick_threshold || right_joystick_mapped_x_position > joystick_threshold ||
+        right_joystick_mapped_y_position < negative_joystick_threshold || right_joystick_mapped_y_position > joystick_threshold) {
+        // * see if you want to go forward
+        if (left_joystick_mapped_x_position > joystick_threshold) {
+            Serial.println("going forward");
+        } else if (left_joystick_mapped_x_position < negative_joystick_threshold) {
+            Serial.println("going backward");
+        } else if (left_joystick_mapped_y_position > joystick_threshold) {
+            Serial.println("going right");
+        } else if (left_joystick_mapped_y_position < negative_joystick_threshold) {
+            Serial.println("going left");
+        } else if (right_joystick_mapped_x_position > joystick_threshold) {
+            Serial.println("going up");
+        } else if (right_joystick_mapped_x_position < negative_joystick_threshold) {
+            Serial.println("going down");
+        }
+    } else {
+        Serial.println("not working");
+    }
 
     // printing the results
-    Serial.print("left, x: " + String(left_joystick_mapped_x_position) + " y: " + String(left_joystick_mapped_y_position) + " state: " + String(left_joystick_switch_state) + " ");
-    Serial.println("right, x: " + String(right_joystick_mapped_x_position) + " y: " + String(right_joystick_mapped_y_position) + " state: " + String(right_joystick_switch_state));
+    // Serial.print("left, x: " + String(left_joystick_mapped_x_position) + " y: " + String(left_joystick_mapped_y_position) + " state: " + String(left_joystick_switch_state) + " ");
+    // Serial.println("right, x: " + String(right_joystick_mapped_x_position) + " y: " + String(right_joystick_mapped_y_position) + " state: " + String(right_joystick_switch_state));
 }
