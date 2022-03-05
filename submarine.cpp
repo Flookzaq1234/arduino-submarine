@@ -57,6 +57,10 @@ void setup() {
 
     pinMode(left_motor_port1, OUTPUT);
     pinMode(left_motor_port2, OUTPUT);
+    pinMode(right_motor_port1, OUTPUT);
+    pinMode(right_motor_port2, OUTPUT);
+    pinMode(updown_motor_port1, OUTPUT);
+    pinMode(updown_motor_port2, OUTPUT);
 
     Serial.begin(9600);
 }
@@ -84,7 +88,6 @@ void loop() {
         left_joystick_mapped_y_position < negative_joystick_threshold || left_joystick_mapped_y_position > joystick_threshold ||
         right_joystick_mapped_x_position < negative_joystick_threshold || right_joystick_mapped_x_position > joystick_threshold ||
         right_joystick_mapped_y_position < negative_joystick_threshold || right_joystick_mapped_y_position > joystick_threshold) {
-        // * see if you want to go forward
         if (left_joystick_mapped_x_position > joystick_threshold) {
             Serial.println("going forward");
         } else if (left_joystick_mapped_x_position < negative_joystick_threshold) {
