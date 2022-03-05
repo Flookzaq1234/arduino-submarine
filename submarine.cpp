@@ -101,8 +101,4 @@ void loop() {
     } else {
         Serial.println("not working");
     }
-
-    // printing the results
-    // Serial.print("left, x: " + String(left_joystick_mapped_x_position) + " y: " + String(left_joystick_mapped_y_position) + " state: " + String(left_joystick_switch_state) + " ");
-    // Serial.println("right, x: " + String(right_joystick_mapped_x_position) + " y: " + String(right_joystick_mapped_y_position) + " state: " + String(right_joystick_switch_state));
 }
