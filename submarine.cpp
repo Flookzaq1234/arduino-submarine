@@ -30,6 +30,8 @@ int right_joystick_mapped_y_position = 0;
 #define left_motor_port2 2
 #define right_motor_port1 0
 #define right_motor_port2 0
+#define updown_motor_port1 0
+#define updown_motor_port2 0
 
 // * Controller plans
 // Left up => Left x positive
